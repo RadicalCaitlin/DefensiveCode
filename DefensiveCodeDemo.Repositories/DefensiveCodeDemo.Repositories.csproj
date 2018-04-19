@@ -5,7 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DefensiveCodeDemo.Contracts\DefensiveCodeDemo.Contracts.csproj" />
+    <ProjectReference Include="..\DefensiveCodeDemo.Models\DefensiveCodeDemo.Models.csproj" />
   </ItemGroup>
 
 </Project>

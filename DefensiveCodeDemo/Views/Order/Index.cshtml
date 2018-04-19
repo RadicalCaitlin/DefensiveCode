@@ -1,0 +1,60 @@
+﻿@model DefensiveCodeDemo.Models.OrderViewModel.CustomerOrderFormViewModel
+
+@if (Model.Error != "")
+{
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-danger" role="alert">
+                    @Model.Error
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("HandleCustomerOrderSubmission", "Order", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.FirstName)
+        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.FirstName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.LastName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th>Item</th>
+            <th>Amount Available</th>
+            <th>Amount Wanted</th>
+        </tr>
+        @{
+            var count = 0;
+        }
+        @foreach (var item in Model.InventoryList)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.AmountAvailable</td>
+                <td>
+                    @Html.Hidden("OrderInventory[" + count + "].InventoryId", item.Id)
+                    @Html.TextBox("OrderInventory[" + count + "].Quantity", 1, new { @class = "form-control", @type = "number" })
+                </td>
+            </tr>
+            count++;
+        }
+    </table>
+    <button type="submit" class="btn btn-primary">Place Order</button>
+}
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

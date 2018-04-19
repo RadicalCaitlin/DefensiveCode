@@ -19,11 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\DemoViewModels\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\DefensiveCodeDemo.Contracts\DefensiveCodeDemo.Contracts.csproj" />
     <ProjectReference Include="..\DefensiveCodeDemo.Models\DefensiveCodeDemo.Models.csproj" />
+    <ProjectReference Include="..\DefensiveCodeDemo.Repositories\DefensiveCodeDemo.Repositories.csproj" />
   </ItemGroup>
 
 </Project>
