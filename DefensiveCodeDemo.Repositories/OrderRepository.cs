@@ -16,6 +16,14 @@ namespace DefensiveCodeDemo.Repositories
             _dbContext = dbContext;
         }
 
+        public async Task<OrderInventory> AddOrderInventoryAsync(OrderInventory orderInventory)
+        {
+            _dbContext.OrderInventory.Add(orderInventory);
+            await _dbContext.SaveChangesAsync();
+
+            return orderInventory;
+        }
+
         public async Task<Order> CreateOrderAsync(Order order)
         {
             _dbContext.Order.Add(order);

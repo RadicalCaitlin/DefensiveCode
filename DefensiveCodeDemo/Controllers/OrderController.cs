@@ -32,7 +32,24 @@ namespace DefensiveCodeDemo.Controllers
             _orderRepository = orderRepository;
         }
 
+        public OrderController()
+        {
+
+        }
+
         public async Task<IActionResult> Index(string error)
+        {
+            var model = new CustomerOrderFormViewModel
+            {
+                InventoryList = await _inventoryRepository.GetInventoryAsync(),
+                OrderInventory = new List<OrderInventory>(),
+                Error = error
+            };
+
+            return View(model);
+        }
+
+        public async Task<IActionResult> RefactoredIndex(string error)
         {
             var model = new CustomerOrderFormViewModel
             {
@@ -111,9 +128,43 @@ namespace DefensiveCodeDemo.Controllers
                 return RedirectToAction("Index", "Order", new { error = "You done goofed!" });
             }
 
-            var customer = GetCustomerForOrderAsync(model);
+            var customer = await GetCustomerForOrderAsync(model);
 
-            var order = await PrepareOrderForCustomer(customer.Id);
+            var order = await PrepareOrderForCustomerAsync(customer.Id);
+
+            var orderTotal = await UpdateInventoryForOrderAndReturnOrderTotalAsync(model, order.Id);
+
+            await HandlePaymentForOrderAsync(customer.Id, order.Id, orderTotal);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        #region
+
+        private async Task<decimal> UpdateInventoryForOrderAndReturnOrderTotalAsync(CustomerOrderFormViewModel model, int orderId)
+        {
+            decimal orderTotal = 0m;
+
+            foreach (var item in model.OrderInventory)
+            {
+                var inventoryItem = await _dbContext.Inventory.SingleOrDefaultAsync(i => i.Id == item.InventoryId);
+                var enoughInventoryAvailable = inventoryItem.AmountAvailable >= item.Quantity;
+
+                if (enoughInventoryAvailable)
+                {
+                    item.OrderId = orderId;
+
+                    await _orderRepository.AddOrderInventoryAsync(item);
+
+                    orderTotal += (inventoryItem.PricePerUnit * item.Quantity);
+
+                    var newAvailableAmount = inventoryItem.AmountAvailable - item.Quantity;
+
+                    inventoryItem.AmountAvailable = newAvailableAmount;
+                }
+            }
+
+            return orderTotal;
         }
 
         private async Task<Customer> GetCustomerForOrderAsync(CustomerOrderFormViewModel model)
@@ -139,7 +190,20 @@ namespace DefensiveCodeDemo.Controllers
             return newOrder;
         }
 
-        private async Task<Order> PrepareOrderForCustomer(int customerId)
+        private async Task HandlePaymentForOrderAsync(int customerId, int orderId, decimal orderTotal)
+        {
+            var newPayment = new Payment
+            {
+                CustomerId = customerId,
+                OrderId = orderId,
+                Total = orderTotal
+            };
+
+            _dbContext.Payment.Add(newPayment);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        private async Task<Order> PrepareOrderForCustomerAsync(int customerId)
         {
             var orderObject = GetOrderObject(customerId);
 
@@ -147,5 +211,20 @@ namespace DefensiveCodeDemo.Controllers
 
             return newOrder;
         }
+
+        public decimal GetOrderTotalUnitTestDemo(decimal[] inventoryPrices, int[] quantities)
+        {
+            decimal orderTotal = 0m;
+            var index = 0;
+            foreach (var item in inventoryPrices)
+            {
+                orderTotal += (inventoryPrices[index] * quantities[index]);
+                index++;
+            }
+
+            return orderTotal;
+        }
+
+        #endregion
     }
 }

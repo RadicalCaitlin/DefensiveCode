@@ -3,15 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2011
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefensiveCodeDemo", "DefensiveCodeDemo\DefensiveCodeDemo.csproj", "{127499EA-82B0-4A3B-9025-DE5AB1E88525}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefensiveCodeDemo", "DefensiveCodeDemo\DefensiveCodeDemo.csproj", "{127499EA-82B0-4A3B-9025-DE5AB1E88525}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefensiveCodeDemo.Repositories", "DefensiveCodeDemo.Repositories\DefensiveCodeDemo.Repositories.csproj", "{67756B11-27BC-4C73-8C38-74785230C6C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefensiveCodeDemo.Repositories", "DefensiveCodeDemo.Repositories\DefensiveCodeDemo.Repositories.csproj", "{67756B11-27BC-4C73-8C38-74785230C6C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefensiveCodeDemo.Models", "DefensiveCodeDemo.Models\DefensiveCodeDemo.Models.csproj", "{A250F977-B7A5-4000-9B06-C3F87B58963A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefensiveCodeDemo.Models", "DefensiveCodeDemo.Models\DefensiveCodeDemo.Models.csproj", "{A250F977-B7A5-4000-9B06-C3F87B58963A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefensiveCodeDemo.Contracts", "DefensiveCodeDemo.Contracts\DefensiveCodeDemo.Contracts.csproj", "{8E285870-774E-4999-B3C5-5AD8C994DDAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefensiveCodeDemo.Contracts", "DefensiveCodeDemo.Contracts\DefensiveCodeDemo.Contracts.csproj", "{8E285870-774E-4999-B3C5-5AD8C994DDAE}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DefensiveCodeDemo.Database", "DefensiveCodeDemo.Database\DefensiveCodeDemo.Database.sqlproj", "{F3A374F8-7E00-46D4-9129-55F31498C812}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test Projects", "Test Projects", "{5420C08A-2894-4D0E-8ADB-DF9545995FD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefensiveCodeDemo.Tests", "DefensiveCodeDemo.Tests\DefensiveCodeDemo.Tests.csproj", "{C50F2333-02BC-4F36-88FF-6200465509B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,9 +45,16 @@ Global
 		{F3A374F8-7E00-46D4-9129-55F31498C812}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3A374F8-7E00-46D4-9129-55F31498C812}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F3A374F8-7E00-46D4-9129-55F31498C812}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C50F2333-02BC-4F36-88FF-6200465509B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C50F2333-02BC-4F36-88FF-6200465509B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C50F2333-02BC-4F36-88FF-6200465509B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C50F2333-02BC-4F36-88FF-6200465509B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C50F2333-02BC-4F36-88FF-6200465509B3} = {5420C08A-2894-4D0E-8ADB-DF9545995FD2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D6338F62-89D1-400D-BA2E-AC6224003911}

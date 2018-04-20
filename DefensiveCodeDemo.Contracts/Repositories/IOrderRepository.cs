@@ -8,6 +8,8 @@ namespace DefensiveCodeDemo.Contracts.Repositories
 {
     public interface IOrderRepository
     {
+        Task<OrderInventory> AddOrderInventoryAsync(OrderInventory orderInventory);
+
         Task<Order> CreateOrderAsync(Order order);
     }
 }

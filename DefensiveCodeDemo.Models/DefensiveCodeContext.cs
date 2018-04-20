@@ -21,5 +21,9 @@ namespace DefensiveCodeDemo.Models
         {
 
         }
+
+        public DefensiveCodeContext()
+        {
+        }
     }
 }

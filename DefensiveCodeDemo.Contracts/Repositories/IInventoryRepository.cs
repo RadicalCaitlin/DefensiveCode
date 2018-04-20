@@ -9,5 +9,7 @@ namespace DefensiveCodeDemo.Contracts.Repositories
     public interface IInventoryRepository
     {
         Task<IEnumerable<Inventory>> GetInventoryAsync();
+
+        Task<Inventory> UpdateInventoryAsync(Inventory inventory);
     }
 }

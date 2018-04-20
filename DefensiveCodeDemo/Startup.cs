@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using DefensiveCodeDemo.Models;
 using DefensiveCodeDemo.Contracts.Repositories;
 using DefensiveCodeDemo.Repositories;
+using DefensiveCodeDemo.Contracts;
 
 namespace DefensiveCodeDemo
 {
@@ -26,7 +27,9 @@ namespace DefensiveCodeDemo
 
             services.AddMvc();
 
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<IInventoryRepository, InventoryRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient<IPaymentRepository, PaymentRepository>();
         }
 

@@ -19,5 +19,13 @@ namespace DefensiveCodeDemo.Repositories
         {
             return await _dbContext.Inventory.ToListAsync();
         }
+
+        public async Task<Inventory> UpdateInventoryAsync(Inventory inventory)
+        {
+            _dbContext.Inventory.Update(inventory);
+            await _dbContext.SaveChangesAsync();
+
+            return inventory;
+        }
     }
 }
