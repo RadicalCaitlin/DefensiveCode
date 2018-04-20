@@ -15,7 +15,7 @@ namespace DefensiveCodeDemo.Tests
             //-- Arrange
             OrderController orderController = new OrderController();
             decimal[] inventoryPrices = { 1.27m, 2.44m, 3.75m };
-            int[] quantities = { 4, 9, 11 };
+            string[] quantities = { "4", "9", "11" };
             decimal expected = 68.29m;
 
             //-- Act

@@ -212,13 +212,13 @@ namespace DefensiveCodeDemo.Controllers
             return newOrder;
         }
 
-        public decimal GetOrderTotalUnitTestDemo(decimal[] inventoryPrices, int[] quantities)
+        public decimal GetOrderTotalUnitTestDemo(decimal[] inventoryPrices, string[] quantities)
         {
             decimal orderTotal = 0m;
             var index = 0;
             foreach (var item in inventoryPrices)
             {
-                orderTotal += (inventoryPrices[index] * quantities[index]);
+                orderTotal += (inventoryPrices[index] * Decimal.Parse(quantities[index]));
                 index++;
             }
 
